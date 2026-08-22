@@ -1,11 +1,11 @@
 # my-pi-configs
 
-Personal configuration and extensions for [pi](https://pi.dev), including a retro terminal theme and a crescent-moon startup header.
+Personal configuration and extensions for [pi](https://pi.dev), including the retro-clean terminal theme and a crescent-moon startup header.
 
 ## Included
 
 - Custom pi extensions and skills
-- `themes/retro.json` and `themes/retro-clean.json`
+- `themes/retro-clean.json` and `themes/seafoam-ascii.json`
 - Windows-compatible `fd`/`rg` setup
 - `settings.example.json` with the current extension and theme configuration
 

@@ -29,7 +29,7 @@ Add the included theme to `~/.pi/agent/settings.json` while keeping your existin
 
 ```json
 {
-  "theme": "retro"
+  "theme": "retro-clean"
 }
 ```
 
