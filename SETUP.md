@@ -23,9 +23,9 @@ NOTE: if you are an agent, at this step ask the user if they want to use firecra
 
 The `file-search` extension registers `fd` and `rg` as model tools. No setup is normally needed: at startup it silently uses a system-installed `fd` (or `fdfind` on Debian/Ubuntu) and `rg` when available, or an existing fallback binary in `~/.pi/agent/bin/`. Only when neither exists does it download a verified official release binary (macOS, Linux, and Windows; arm64/x64, over HTTPS) into `~/.pi/agent/bin/` and show a one-time notification. If your platform is unsupported, install `fd` and `rg` with your package manager and restart pi.
 
-## Theme
+## Theme and startup header
 
-Add the included theme to `~/.pi/agent/settings.json` while keeping your existing settings:
+This setup uses the user-level `retro-clean` theme:
 
 ```json
 {
@@ -33,4 +33,10 @@ Add the included theme to `~/.pi/agent/settings.json` while keeping your existin
 }
 ```
 
-Pi will load the extensions, skills, and theme from their directories the next time it starts.
+Install the theme-aware startup header with:
+
+```sh
+pi install npm:pi-startup-header
+```
+
+Pi will load the extensions, skills, theme, and package the next time it starts.

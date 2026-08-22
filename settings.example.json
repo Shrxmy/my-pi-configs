@@ -27,5 +27,7 @@
     "~/.pi/agent/my-pi-setup/extensions/ui-customization",
     "~/.pi/agent/my-pi-setup/extensions/workflows"
   ],
-  "packages": []
+  "packages": [
+    "npm:pi-startup-header"
+  ]
 }

@@ -4,7 +4,6 @@ import type {
   ExtensionAPI,
   ExtensionContext,
   ReadonlyFooterDataProvider,
-  Theme,
 } from "@earendil-works/pi-coding-agent";
 import {
   getCapabilities,
@@ -32,18 +31,6 @@ interface DashboardTui extends RenderableNode {
   requestRender(force?: boolean): void;
 }
 
-const HEADER_COLORS = ["accent", "mdHeading", "mdQuote", "accent"] as const;
-const TITLE_LINES = [
-  "       ####",
-  "     #######",
-  "    ########",
-  "   #########",
-  "   #####",
-  "   #####",
-  "    ########",
-  "     #######",
-  "       ####",
-];
 const ANSI_PATTERN =
   /[\u001B\u009B][[\]()#;?]*(?:(?:(?:[a-zA-Z\d]*(?:;[a-zA-Z\d]*)*)?\u0007)|(?:(?:\d{1,4}(?:;\d{0,4})*)?[\dA-PR-TZcf-nq-uy=><~]))/g;
 // eslint-disable-next-line no-control-regex
@@ -60,20 +47,6 @@ function sanitizeTerminalLabel(text: string) {
     .replace(CSI_PATTERN, "")
     .replace(ESCAPE_PATTERN, "")
     .replace(/[\u0000-\u001f\u007f-\u009f]/g, "");
-}
-
-function gradientText(text: string, phase: number, theme: Theme) {
-  const characters = [...text];
-  const span = Math.max(characters.length - 1, 1);
-
-  return characters
-    .map((character, index) => {
-      if (character === " ") return character;
-      const position = (((index / span + phase) % 1) + 1) % 1;
-      const color = HEADER_COLORS[Math.floor(position * HEADER_COLORS.length)]!;
-      return theme.fg(color, character);
-    })
-    .join("");
 }
 
 function hasChildren(
@@ -128,11 +101,6 @@ function formatDirectory(cwd: string) {
   if (cwd === home) return "~";
   const display = cwd.startsWith(`${home}/`) ? `~/${relative(home, cwd)}` : cwd;
   return sanitizeTerminalLabel(display);
-}
-
-function center(text: string, width: number) {
-  const padding = Math.max(0, Math.floor((width - visibleWidth(text)) / 2));
-  return truncateToWidth(`${" ".repeat(padding)}${text}`, width);
 }
 
 function columns(left: string, right: string, width: number) {
@@ -191,25 +159,10 @@ export default function uiCustomization(pi: ExtensionAPI) {
   function install(ctx: ExtensionContext) {
     if (ctx.mode !== "tui") return;
 
-    ctx.ui.setHeader((tui, theme) => {
+    ctx.ui.setFooter((tui, theme, footerData: ReadonlyFooterDataProvider) => {
       activeTui = tui;
       requestRender = () => tui.requestRender();
       scheduleThemeRemoval(tui);
-
-      return {
-        render(width: number) {
-          const art = TITLE_LINES.map((line, row) =>
-            center(gradientText(line, row * 0.045, theme), width),
-          );
-          const subtitle = center(theme.fg("accent", theme.bold(title)), width);
-          return ["", ...art, subtitle, ""];
-        },
-        invalidate() {},
-      };
-    });
-
-    ctx.ui.setFooter((tui, theme, footerData: ReadonlyFooterDataProvider) => {
-      requestRender = () => tui.requestRender();
 
       return {
         invalidate() {},
@@ -289,7 +242,6 @@ export default function uiCustomization(pi: ExtensionAPI) {
     activeTui = undefined;
     requestRender = undefined;
     if (ctx.mode === "tui") {
-      ctx.ui.setHeader(undefined);
       ctx.ui.setFooter(undefined);
     }
   });
