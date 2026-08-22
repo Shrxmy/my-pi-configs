@@ -1,0 +1,31 @@
+{
+  "theme": "retro",
+  "enableSkillCommands": true,
+  "hideThinkingBlock": false,
+  "prompts": [
+    "~/.pi/agent/prompts"
+  ],
+  "skills": [
+    "~/.pi/agent/skills",
+    "~/.pi/agent/my-pi-setup/skills"
+  ],
+  "themes": [
+    "~/.pi/agent/themes",
+    "~/.pi/agent/my-pi-setup/themes"
+  ],
+  "extensions": [
+    "~/.pi/agent/my-pi-setup/extensions/ask-user",
+    "~/.pi/agent/my-pi-setup/extensions/background-terminals",
+    "~/.pi/agent/my-pi-setup/extensions/copy-all",
+    "~/.pi/agent/my-pi-setup/extensions/file-search",
+    "~/.pi/agent/my-pi-setup/extensions/firecrawl-search",
+    "~/.pi/agent/my-pi-setup/extensions/git-info",
+    "~/.pi/agent/my-pi-setup/extensions/model-info",
+    "~/.pi/agent/my-pi-setup/extensions/spark-strict-tools",
+    "~/.pi/agent/my-pi-setup/extensions/subagents",
+    "~/.pi/agent/my-pi-setup/extensions/summaries",
+    "~/.pi/agent/my-pi-setup/extensions/ui-customization",
+    "~/.pi/agent/my-pi-setup/extensions/workflows"
+  ],
+  "packages": []
+}
