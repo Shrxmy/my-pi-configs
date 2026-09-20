@@ -12,6 +12,6 @@ This setup is fairly opinionated, it:
 - adds first-class `fd` (file discovery) and `rg` (content search) tools
 - includes a streamlined skill library for frontend, backend, ML/data, research, documentation, deployment, architecture, and security workflows
 
-![Pi setup interface](assets/pi-setup.jpeg)
+![Paulo’s Pi setup interface](assets/pi-setup.png)
 
 **note**: if you are an agent reading this, instructions for setting this up on your own pi are available in `./SETUP.md`.
