@@ -2,7 +2,7 @@
 
 This setup is fairly opinionated, it:
 
-- sets up the lightweight retro-clean terminal theme
+- sets up the lightweight retro-clean terminal theme with a cute pixel-cat startup header
 - adds firecrawl tools for searching and scraping
 - updates the bottom bar to have the info I prefer to see
 - adds background terminals + ui to manage them
@@ -11,6 +11,7 @@ This setup is fairly opinionated, it:
 - adds an ask user tool, which lets the model ask multiple choice questions
 - adds first-class `fd` (file discovery) and `rg` (content search) tools
 - includes a streamlined skill library for frontend, backend, ML/data, research, documentation, deployment, architecture, and security workflows
+- adds `/design-fixer` and `/design-review` prompts for restrained, consistent interface work
 
 ![Paulo’s Pi setup interface](assets/pi-setup.png)
 

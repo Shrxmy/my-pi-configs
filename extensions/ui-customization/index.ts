@@ -1,9 +1,11 @@
 import { homedir } from "node:os";
 import { relative } from "node:path";
-import type {
-  ExtensionAPI,
-  ExtensionContext,
-  ReadonlyFooterDataProvider,
+import {
+  VERSION,
+  type ExtensionAPI,
+  type ExtensionContext,
+  type ReadonlyFooterDataProvider,
+  type Theme,
 } from "@earendil-works/pi-coding-agent";
 import {
   getCapabilities,
@@ -103,6 +105,27 @@ function formatDirectory(cwd: string) {
   return sanitizeTerminalLabel(display);
 }
 
+function createCuteHeader(theme: Theme) {
+  return {
+    render(width: number) {
+      const accent = (text: string) => theme.fg("accent", text);
+      const muted = (text: string) => theme.fg("muted", text);
+      const dim = (text: string) => theme.fg("dim", text);
+      const lines = [
+        dim("       ✦       ˚"),
+        accent("   /\\_/\\"),
+        `${accent("  ( o.o )")}     ${theme.bold(accent("π"))}`,
+        `${accent("   > ^ <")}   ${muted("ready to build!")}`,
+        dim("  code gently · ship boldly"),
+        dim(`  pi v${VERSION} · ctrl+o startup help · / commands`),
+        "",
+      ];
+      return lines.map((line) => truncateToWidth(line, width));
+    },
+    invalidate() {},
+  };
+}
+
 function columns(left: string, right: string, width: number) {
   if (!right) return truncateToWidth(left, width);
 
@@ -158,6 +181,8 @@ export default function uiCustomization(pi: ExtensionAPI) {
 
   function install(ctx: ExtensionContext) {
     if (ctx.mode !== "tui") return;
+
+    ctx.ui.setHeader((_tui, theme) => createCuteHeader(theme));
 
     ctx.ui.setFooter((tui, theme, footerData: ReadonlyFooterDataProvider) => {
       activeTui = tui;
@@ -242,6 +267,7 @@ export default function uiCustomization(pi: ExtensionAPI) {
     activeTui = undefined;
     requestRender = undefined;
     if (ctx.mode === "tui") {
+      ctx.ui.setHeader(undefined);
       ctx.ui.setFooter(undefined);
     }
   });

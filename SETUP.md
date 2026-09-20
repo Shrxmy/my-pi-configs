@@ -10,12 +10,13 @@ npm install
 mkdir -p ~/.pi/agent/skills ~/.pi/agent/themes ~/.pi/agent/prompts
 cp -R skills/. ~/.pi/agent/skills/
 cp -R themes/. ~/.pi/agent/themes/
+cp -R prompts/. ~/.pi/agent/prompts/
 cp config/AGENTS.md ~/.pi/agent/AGENTS.md
 cp config/keybindings.json ~/.pi/agent/keybindings.json
 cp settings.example.json ~/.pi/agent/settings.json
 ```
 
-The settings load extensions and themes from `~/.pi/agent/my-pi-setup` while global skills remain in `~/.pi/agent/skills`.
+The settings load extensions and themes from `~/.pi/agent/my-pi-setup` while global skills and prompt templates remain in `~/.pi/agent/skills` and `~/.pi/agent/prompts`.
 
 ## Firecrawl
 
