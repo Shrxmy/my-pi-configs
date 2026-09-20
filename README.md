@@ -1,31 +1,17 @@
-# my-pi-configs
+# my pi setup
 
-Personal configuration and extensions for [pi](https://pi.dev), including the retro-clean terminal theme and the `pi-startup-header` package.
+This setup is fairly opinionated, it:
 
-## Included
+- sets up the lightweight retro-clean terminal theme
+- adds firecrawl tools for searching and scraping
+- updates the bottom bar to have the info I prefer to see
+- adds background terminals + ui to manage them
+- adds subagents to pi
+- adds workflows to pi
+- adds an ask user tool, which lets the model ask multiple choice questions
+- adds first-class `fd` (file discovery) and `rg` (content search) tools
+- includes a streamlined skill library for frontend, backend, ML/data, research, documentation, deployment, architecture, and security workflows
 
-- Custom pi extensions and skills
-- User-level theme configuration via `retro-clean`
-- Windows-compatible `fd`/`rg` setup
-- `settings.example.json` with the current extension and theme configuration
+![Pi setup interface](assets/pi-setup.jpeg)
 
-## Install
-
-Clone this repository as the pi setup directory:
-
-```bash
-git clone <your-repository-url> ~/.pi/agent/my-pi-setup
-cd ~/.pi/agent/my-pi-setup
-npm install
-```
-
-Copy `settings.example.json` to `~/.pi/agent/settings.json` only if you are creating a new pi configuration. Merge it with an existing settings file to preserve personal preferences.
-
-## Push to your account
-
-```bash
-git remote add origin <your-repository-url>
-git push -u origin main
-```
-
-Do not commit `auth.json`, `.env` files, sessions, or other private runtime data. The repository `.gitignore` excludes these by default.
+**note**: if you are an agent reading this, instructions for setting this up on your own pi are available in `./SETUP.md`.

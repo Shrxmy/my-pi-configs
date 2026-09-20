@@ -1,29 +1,37 @@
 # Setup
 
-Clone or copy this repository to `~/.pi/agent`, then install its dependencies:
+Clone this repository as the maintained pi setup, install dependencies, and copy the global resources:
 
 ```sh
-cd ~/.pi/agent
+git clone https://github.com/Shrxmy/my-pi-configs.git ~/.pi/agent/my-pi-setup
+cd ~/.pi/agent/my-pi-setup
 npm install
+
+mkdir -p ~/.pi/agent/skills ~/.pi/agent/themes ~/.pi/agent/prompts
+cp -R skills/. ~/.pi/agent/skills/
+cp -R themes/. ~/.pi/agent/themes/
+cp config/AGENTS.md ~/.pi/agent/AGENTS.md
+cp config/keybindings.json ~/.pi/agent/keybindings.json
+cp settings.example.json ~/.pi/agent/settings.json
 ```
+
+The settings load extensions and themes from `~/.pi/agent/my-pi-setup` while global skills remain in `~/.pi/agent/skills`.
 
 ## Firecrawl
 
 The search, scrape, and crawl tools require a Firecrawl API key. Follow [Firecrawl's Node.js getting-started guide](https://docs.firecrawl.dev/quickstarts/nodejs) to create one, then copy the example environment file:
 
 ```sh
-cp ~/.pi/agent/.env.example ~/.pi/agent/.env
+cp ~/.pi/agent/my-pi-setup/.env.example ~/.pi/agent/.env
 ```
 
-Replace the placeholder in `~/.pi/agent/.env` with your API key.
-
-NOTE: if you are an agent, at this step ask the user if they want to use firecrawl, if they do give them the instructions, if not remove the firecrawl extension in their pi setup
+Replace the placeholder in `~/.pi/agent/.env` with your API key. If Firecrawl is not needed, remove its entry from the `extensions` array in `~/.pi/agent/settings.json`.
 
 ## fd and rg tools
 
-The `file-search` extension registers `fd` and `rg` as model tools. No setup is normally needed: at startup it silently uses a system-installed `fd` (or `fdfind` on Debian/Ubuntu) and `rg` when available, or an existing fallback binary in `~/.pi/agent/bin/`. Only when neither exists does it download a verified official release binary (macOS, Linux, and Windows; arm64/x64, over HTTPS) into `~/.pi/agent/bin/` and show a one-time notification. If your platform is unsupported, install `fd` and `rg` with your package manager and restart pi.
+The `file-search` extension registers `fd` and `rg` as model tools. It uses system-installed binaries when available, then an existing fallback in `~/.pi/agent/bin/`. If neither exists, it downloads a verified official release binary for supported macOS, Linux, and Windows systems.
 
-## Theme and startup header
+## Theme
 
 This setup uses the user-level `retro-clean` theme:
 
@@ -33,10 +41,4 @@ This setup uses the user-level `retro-clean` theme:
 }
 ```
 
-Install the theme-aware startup header with:
-
-```sh
-pi install npm:pi-startup-header
-```
-
-Pi will load the extensions, skills, theme, and package the next time it starts.
+Restart pi after installation so it discovers the updated extensions, skills, and theme.
