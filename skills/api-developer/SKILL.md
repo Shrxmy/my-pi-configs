@@ -8,6 +8,17 @@ compatibility: pi
 
 Comprehensive API design and development for modern web applications.
 
+## Required Safety Baseline
+
+Treat the examples below as conceptual sketches, not production-ready code. Before copying or adapting any snippet:
+
+- Inspect the actual framework, auth model, project conventions, runtime, and deployment configuration.
+- Validate and normalize every untrusted parameter/body against a schema; enforce authorization on the server for every resource and action. Authentication alone does not authorize access.
+- Use framework-supported session/JWT verification and validate issuer, audience, expiry, and required claims. Never accept a role or owner identity from client input.
+- Return stable, sanitized error responses; log diagnostic detail only on the server and never leak secrets or stack traces.
+- Make writes safe under retries where side effects or duplicate requests can cause harm; test unauthorized, invalid, missing, and duplicate cases.
+- Consult the `vibe-security` skill for auth, user data, credentials, database rules, payments, or other sensitive flows.
+
 ## Core Workflows
 
 ### 1. REST API with Express

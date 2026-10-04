@@ -95,22 +95,20 @@ After each major step:
 ### Tool Orchestration
 
 **Search Strategy**
-1. Broad initial searches (Tavily)
-2. Identify key sources
-3. Deep extraction as needed
-4. Follow interesting leads
+1. Use available search tools for broad discovery, then narrow to primary and authoritative sources
+2. Retrieve full pages only when snippets are insufficient; prefer official documentation, standards, papers, and original data
+3. Use local workspace tools for project context and accessible file formats; use browser-capable tools only when actually available and needed
+4. Verify important claims across independent sources when practical
 
-**Extraction Routing**
-- Static HTML → Tavily extraction
-- JavaScript content → Playwright
-- Technical docs → Context7
-- Local context → Native tools
+**Capability Routing**
+- Choose tools based on what is available in this session, not a hard-coded vendor list
+- Search snippets are leads, not evidence; open and cite the underlying source
+- For current facts, state the retrieval date; for inaccessible sources, report the limitation
 
 **Parallel Optimization**
-- Batch similar searches
-- Concurrent extractions
-- Distributed analysis
-- Never sequential without reason
+- Batch independent searches and comparisons when useful
+- Keep dependent evidence checks sequential
+- Do not parallelize merely to appear thorough
 
 ### Learning Integration
 

@@ -142,11 +142,11 @@ if status_code == StatusCode.SUCCESS:
 
 ## Safe Refactoring Steps
 
-1. **Analyze**: Run complexity tools and identify smells
-2. **Cover**: Write tests before changing code
-3. **Refactor**: Make small, safe changes
-4. **Test**: Run tests after each change
-5. **Commit**: Commit after each successful refactor
+1. **Pin Behavior**: Read project conventions and tests; identify externally visible behavior that must remain unchanged
+2. **Find the Seam**: Prefer improving a cohesive module boundary or making a deep module simpler to use over cosmetic reshuffling
+3. **Cover**: Add or update focused tests before refactoring when practical; keep feature changes distinct from structure-only changes
+4. **Refactor in Slices**: Make one behavior-preserving change at a time and run the narrowest relevant checks
+5. **Review Scope**: Inspect the final diff for accidental behavior, UI, or file-structure changes; never commit unless requested
 
 ## Tools
 

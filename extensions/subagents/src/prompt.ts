@@ -11,7 +11,8 @@ export const SUBAGENT_SPAWN_PROMPT_SNIPPET =
 /** Guides the parent model to delegate standalone tasks and avoid unnecessary blocking waits. */
 export const SUBAGENT_SPAWN_PROMPT_GUIDELINES = [
   "Use subagent_spawn to delegate self-contained tasks that can run in the background; give it a complete, standalone prompt.",
-  "Pick the subagent harness deliberately: pi unless you have a reason to prefer Claude Code or Codex (e.g. the user asked for one, or the task suits that harness).",
+  "Prefer the pi harness and use model openai-codex/gpt-6-luna with high reasoning effort. The pi harness selects this model when available and otherwise inherits the parent model; high reasoning effort is the default. Preserve the user's explicit overrides.",
+  "Use another harness only when a task-specific capability justifies it or the preferred model is unavailable. Keep high reasoning effort where that backend supports it, and state the fallback when reporting results.",
   "After subagent_spawn, keep working; results arrive automatically. Only call subagent_wait when you cannot proceed without the result.",
 ];
 
@@ -25,9 +26,9 @@ export const SUBAGENT_SPAWN_PARAMETER_DESCRIPTIONS = {
   workingDir:
     "Trusted working directory for the autonomous child (default: current working directory)",
   model:
-    'Model hint, interpreted by the chosen harness (pi: "provider/model-id" or model id; claude: model alias like "sonnet"/"opus"; codex: model slug). Omit for the harness default (pi inherits the current model).',
+    'Model hint, interpreted by the chosen harness (pi: "provider/model-id" or model id; claude: model alias like "sonnet"/"opus"; codex: model slug). For pi, omission prefers openai-codex/gpt-6-luna when available, otherwise it inherits the parent model; other harnesses use their native defaults.',
   reasoningEffort:
-    "Reasoning effort on a shared scale; the harness maps it to its nearest native equivalent (pi thinking level, codex reasoning effort, claude thinking budget). Omit for the harness default (pi inherits the current level).",
+    "Reasoning effort on a shared scale; the harness maps it to its nearest native equivalent (pi thinking level, codex reasoning effort, claude thinking budget). Omission defaults to high.",
 };
 
 /** Builds the subagent_spawn result that tells the parent model how to continue or inspect the child. */

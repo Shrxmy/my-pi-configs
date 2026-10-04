@@ -76,6 +76,8 @@ import {
 } from "./src/runtime.ts";
 import { openSubagentPicker, openSubagentTakeover } from "./src/ui/takeover.ts";
 
+const DEFAULT_PI_SUBAGENT_MODEL = "openai-codex/gpt-6-luna";
+const DEFAULT_SUBAGENT_REASONING_EFFORT = "high" as const;
 const SUBAGENT_OUTPUT_MAX_BYTES = 24 * 1024;
 const WAIT_OUTPUT_MAX_BYTES = 48 * 1024;
 const WAIT_PER_AGENT_MAX_BYTES = 16 * 1024;
@@ -312,8 +314,14 @@ export default function (pi: ExtensionAPI) {
           prompt: params.prompt,
           title,
           cwd,
-          model: params.model,
-          reasoningEffort: params.reasoning_effort,
+          model:
+            params.model ??
+            (harness === "pi" &&
+            ctx.modelRegistry?.find("openai-codex", "gpt-6-luna")
+              ? DEFAULT_PI_SUBAGENT_MODEL
+              : undefined),
+          reasoningEffort:
+            params.reasoning_effort ?? DEFAULT_SUBAGENT_REASONING_EFFORT,
           parent: {
             parentCwd: ctx.cwd,
             projectTrusted: resolveChildProjectTrust({
