@@ -8,7 +8,14 @@ cd ~/.pi/agent/my-pi-setup
 npm install
 
 mkdir -p ~/.pi/agent/skills ~/.pi/agent/themes ~/.pi/agent/prompts
-cp -R skills/. ~/.pi/agent/skills/
+for skill in skills/*; do
+  name=$(basename "$skill")
+  if [ -f "$HOME/.agents/skills/$name/SKILL.md" ]; then
+    printf 'Skipping %s; Pi auto-discovers it from ~/.agents/skills.\n' "$name"
+    continue
+  fi
+  cp -R "$skill" ~/.pi/agent/skills/
+done
 cp -R themes/. ~/.pi/agent/themes/
 cp -R prompts/. ~/.pi/agent/prompts/
 cp config/AGENTS.md ~/.pi/agent/AGENTS.md
