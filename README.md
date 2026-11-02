@@ -10,7 +10,7 @@ This setup is fairly opinionated, it:
 - adds workflows to pi
 - adds an ask user tool, which lets the model ask multiple choice questions
 - adds first-class `fd` (file discovery) and `rg` (content search) tools
-- includes a streamlined skill library for frontend, backend, ML/data, research, documentation, deployment, architecture, and security workflows
+- includes a streamlined skill library for frontend, backend, ML/data, research, documentation, deployment, architecture, security, Sanity, Microsoft Foundry, reverse engineering, and independent GPT code review workflows
 - adds `/design-fixer` and `/design-review` prompts for restrained, consistent interface work
 
 ![Paulo’s Pi setup interface](assets/pi-setup.png)
